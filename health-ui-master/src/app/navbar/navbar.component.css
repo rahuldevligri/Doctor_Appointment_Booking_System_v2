@@ -1,0 +1,50 @@
+.navbar{
+    background: rgba(4, 122, 189, 1);
+
+}
+.logo{
+    font-style: italic;
+    color: #000000;
+    font-weight: 900;
+    font-size: 40px;
+    line-height: 50px;
+    padding-top: 0px;
+    width: 150px;
+    border-radius: nullpx;
+}
+.home a{
+height: 10px;
+width: 59.67085647583008px;
+left: 0px;
+top: 9px;
+border-radius: nullpx;
+
+}
+
+.about{
+font-size: 20px;
+font-weight: 300;
+line-height: 24px;
+letter-spacing: 0em;
+border-radius: nullpx;
+}
+
+.nav-item{
+    padding-left: 25px;
+
+}
+.nav-item a{
+    color: #fff;
+     border:  0px;  
+     padding: 22px;
+     border-radius: 16px; 
+     list-style-type:none;
+    font-style: normal; 
+    font-weight: bolder;
+}
+
+.nav-item a:hover{
+    border-bottom: 1px solid cadetblue; 
+    background: #fff;
+    color: #0a5071;
+}

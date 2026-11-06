@@ -1,0 +1,82 @@
+
+<!-- <table class="table table-bordered">
+  <thead>
+    <tr>
+      <th></th>
+      <th>AppointmentId</th>
+      <th>Doctor Name</th>
+      <th>Amount</th>
+      <th>Date</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let order of orderlist">
+      <tr>
+        <td (click)="order.isExpand = !order.isExpand">
+          <i *ngIf="!order.isExpand" class="bi-chevron-right"></i>
+          <i *ngIf="order.isExpand" class="bi-chevron-up"></i>
+        </td>
+        <td>{{ order.AppointmentId }}</td>
+        <td>{{ order.DoctorName }}</td>
+        <td>{{ order.Amount }}</td>
+        <td>{{ order.StartTime }}</td>
+        <td>{{ order.Status }}</td>
+      </tr>
+      <tr *ngIf="order.isExpand">
+        <td colspan="4">
+          <table class="table table-sm">
+            <thead>
+              <th>Address1</th>
+              <th>Address2</th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let row2 of order.address">
+                <td>{{ row2.add1 }}</td>
+                <td>{{ row2.add2 }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+    </ng-container>
+  </tbody>
+</table> -->
+
+<table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">appointmentId</th>
+        <th scope="col">Doctor Name</th>
+        <th scope="col">Amount</th>
+        <th scope="col">StartTime</th>
+        <th scope="col">EndTime</th>
+        <th scope="col">Appointment Status</th>
+        <th scope="col">Payment Status</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let order of orderlist">
+            <td>{{order.AppointmentId}}</td>
+            <td>{{order.DoctorName}}</td>
+            <td>{{order.Amount}}</td>
+            <td>{{order.StartTime}}</td>
+            <td>{{order.EndTime}}</td>
+            <td>{{order.appointmentstatus}}</td>
+            <td>{{order.status}}</td>
+            <select [(ngModel)]="selectedOrderId" (change)="onOptionSelected()"  >
+              <option value="" disabled selected>Select an option</option>
+              <option  [value]="order.AppointmentId">Cancel</option>
+              
+            </select>
+        </tr>
+    </tbody>
+</table>
+
+<div *ngIf="showConfirmation">
+  <p>Are you sure you want to cancel this order (ID: {{ selectedOrderId }})?</p>
+  <button (click)="confirmCancellation()">Yes</button>
+  <button (click)="cancelCancellation()">No</button>
+</div>
+

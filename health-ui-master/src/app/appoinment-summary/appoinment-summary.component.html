@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <div class="doctor-card">
+        <div class="card-header">
+          <h1>Appointment Summary</h1>
+        </div>
+        <div class="card-body">
+          <div class="doctor-info">
+            <h2>{{ selectedDoctor }}</h2>
+            <p><strong>Specialization:</strong> {{ selectedCategory }}</p>
+            <p><strong>Hospital:</strong> {{ selectedHospital }}</p>
+          </div>
+          <div class="appointment-details">
+            <p><strong>Slot:</strong> {{ selectedSlot }}</p>
+            <p><strong>Fee:</strong> {{ selectedFee }}</p>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button class="btn btn-success" (click)="pay(selectedFee,selectedScheduleId,selectedDoctorId)" >Confirm & Pay</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

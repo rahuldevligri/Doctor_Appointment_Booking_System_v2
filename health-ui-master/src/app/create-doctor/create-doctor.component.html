@@ -1,0 +1,110 @@
+<div class="container" style="padding: 6px 10px 6px 10px;">
+    <div class="header-container d-flex align-items-center justify-content-between">
+      <div class="header-content">
+        <img src="https://avatars.githubusercontent.com/u/128212455?v=4" alt="Zumply Health" class="float-start">
+        <span class="header-text"><b>Add </b>Doctor Details</span>
+      </div>
+      <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()"></button>
+    </div>
+
+  <div class="form-container">
+    <div class="left-container">
+      <button class="btn"><i class="material-icons">&#xE147;</i>Create Specialization</button>
+      <button class="btn" style="margin-top: 10px;"><i class="material-icons">&#xE147;</i>Create Hospital</button>
+    </div>
+
+    <div class="right-container">
+      <form [formGroup]="doctorForm">
+        <div class="form-group row">
+          <label for="fullName" class="col-sm-3 col-form-label">Name<span class="mandatory">*</span></label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control" formControlName="fullName" id="name" name="name" placeholder="Enter name">
+              <mat-error *ngIf="doctorForm.controls.fullName.dirty && doctorForm.get('fullName').errors?.['required']">This field is required</mat-error>
+              <mat-error *ngIf="doctorForm.get('fullName').hasError('minlength')">The name must be at least 6 characters long</mat-error>
+              <mat-error *ngIf="doctorForm.get('fullName').hasError('maxlength')">The name must be no more than 20 characters long</mat-error>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="gender" class="col-sm-3 col-form-label">Gender<span class="mandatory">*</span></label>
+          <div class="col-sm-9"> 
+            <select class="form-control" formControlName="gender" id="gender" name="gender" required>
+              <option value="" selected hidden>Select Gender</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select>
+            <mat-error *ngIf="doctorForm.get('gender').hasError('required') && doctorForm.controls.gender.touched">This field is required</mat-error>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="mobile" class="col-sm-3 col-form-label">Mobile<span class="mandatory">*</span></label>
+          <div class="col-sm-9"> 
+          <input type="number" class="form-control" formControlName="mobile" id="mobile" name="mobile" placeholder="Enter Mobile" >
+            <mat-error *ngIf="doctorForm.controls.mobile.dirty  && doctorForm.get('mobile').errors?.['required']">This field is required</mat-error>
+            <mat-error *ngIf="doctorForm.get('mobile').errors?.['pattern']">The mobile number must be a 10 digit number</mat-error>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="email" class="col-sm-3 col-form-label">Email<span class="mandatory">*</span></label>
+          <div class="col-sm-9"> 
+          <input type="email" class="form-control" formControlName="email" id="email" name="email" placeholder="Enter Email">
+          <mat-error *ngIf="doctorForm.controls.email.dirty && doctorForm.get('email').errors?.['required']">This field is required</mat-error>
+          <mat-error *ngIf="doctorForm.get('email').errors?.['email']">Invalid email format</mat-error>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="rating" class="col-sm-3 col-form-label">Rating<span class="mandatory">*</span></label>
+          <div class="col-sm-9"> 
+          <input type="number" class="form-control" formControlName="rating" id="rating" name="rating" placeholder="Enter Rating">
+          <mat-error *ngIf="doctorForm.controls.rating.dirty && doctorForm.get('rating').errors?.['required']">This field is required</mat-error>
+          <mat-error *ngIf="doctorForm.get('rating').errors?.['min']">Rating must be at least 1</mat-error>
+          <mat-error *ngIf="doctorForm.get('rating').errors?.['max']">Rating cannot exceed 5</mat-error>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="registrationNumber" class="col-sm-3 col-form-label">Registration Number<span class="mandatory">*</span></label>
+          <div class="col-sm-9"> 
+          <input type="text" class="form-control" formControlName="registrationNumber" id="registrationNumber" name="registrationNumber" placeholder="Enter Registration Number">
+          <mat-error *ngIf="doctorForm.controls.registrationNumber.dirty && doctorForm.get('registrationNumber').errors?.['required']">This field is required</mat-error>
+          <mat-error *ngIf="doctorForm.get('registrationNumber').errors?.['minlength']">Registration number must be at least 3 characters long</mat-error>
+          <mat-error *ngIf="doctorForm.get('registrationNumber').errors?.['maxlength']">Registration number cannot exceed 8 characters</mat-error>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="specialization" class="col-sm-3 col-form-label">Specialization<span class="mandatory">*</span></label>
+          <div class="col-sm-9"> 
+          <select class="form-control" formControlName="doctorSpecialization" id="specialization" name="specialization" required>
+            <option value="" selected hidden>Select Specialization</option>
+            <option *ngFor="let specialization of specializations" [ngValue]="specialization">{{ specialization.specializationName }}</option>
+          </select>
+          <mat-error *ngIf="doctorForm.get('doctorSpecialization').hasError('required') && doctorForm.controls.doctorSpecialization.touched">This field is required</mat-error>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="hospital" class="col-sm-3 col-form-label">Hospital<span class="mandatory">*</span></label>
+          <div class="col-sm-9"> 
+          <select class="form-control" formControlName="hospital" id="hospital" name="hospital" required>
+            <option value="" selected hidden>Select Hospital</option>
+            <option *ngFor="let hospital of hospitals" [ngValue]="hospital">{{ hospital.name }}</option>
+          </select>
+          <mat-error *ngIf="doctorForm.get('hospital').hasError('required') && doctorForm.controls.hospital.touched">This field is required</mat-error>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="fees" class="col-sm-3 col-form-label">Fees<span class="mandatory">*</span></label>
+          <div class="col-sm-9"> 
+          <input type="number" class="form-control" formControlName="fees" id="fees" name="fees" placeholder="Enter Fees">
+          <mat-error *ngIf="doctorForm.controls.fees.dirty && doctorForm.get('fees').errors?.['required']">This field is required</mat-error>
+          <mat-error *ngIf="doctorForm.get('fees').errors?.['min']">Fees must be at least 100</mat-error>
+          <mat-error *ngIf="doctorForm.get('fees').errors?.['max']">Fees cannot exceed 10000</mat-error>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+    <div class="bottom-container d-flex justify-content-end">
+      <button [disabled]="!doctorForm.valid || !doctorForm.dirty" class="btn btn-success" (click)="saveDoctor()">Save</button>
+      <button class="btn btn-secondary" style="margin-left: 10px;" (click)="closeModal()">Cancel</button>
+    </div>
+</div>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+<body>
+  <div class="container">
+    <div class="title">Registration</div>
+    <div class="content">
+      <form [formGroup]="registerForm" (ngSubmit)="addUser()">
+        <div class="user-details">
+          <div class="input-box">
+            <span class="details">First Name</span>
+            <input type="text"
+            class="form-control"
+            formControlName="firstName"
+            id="firstName"
+            [(ngModel)]="user.firstName"
+            placeholder="Enter First Name" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Middle Name</span>
+            <input type="text"
+            class="form-control"
+            formControlName="middleName"
+            id="middleName"
+            [(ngModel)]="user.middleName"
+            placeholder="Enter last Name" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Last Name</span>
+            <input type="text"
+            type="text"
+            class="form-control"
+            formControlName="lastName"
+            id="lastName"
+            [(ngModel)]="user.lastName"
+            placeholder="Enter Last Name" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Username</span>
+            <input type="text"
+            class="form-control"
+            formControlName="username"
+            id="name"
+            [(ngModel)]="user.username"
+            placeholder="Enter Username" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Email</span>
+            <input type="email"
+            class="form-control"
+            formControlName="email"
+            id="email"
+            [(ngModel)]="user.email"
+            placeholder="Enter email" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Phone Number</span>
+            <input type="text"
+            class="form-control"
+            formControlName="mobile"
+            id="mobile"
+            [(ngModel)]="user.mobile"
+            placeholder="Enter phone" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Gender</span>
+            <input type="text"
+            class="form-control"
+            formControlName="gender"
+            id="gender"
+            [(ngModel)]="user.gender"
+            placeholder="Enter Gender" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Password</span>
+            <input type="text"
+            type="password"
+            class="form-control"
+            formControlName="password"
+            id="password"
+            [(ngModel)]="user.password"
+            placeholder="Enter password" required>
+          </div>
+          
+        </div>
+      
+        <div class="button">
+          <input type="submit" class="custom-btn btn-9"
+          type="submit"
+          [disabled]="registerForm.invalid" value="Register">
+
+          <div class="signin-link">Already a member? <a href="/login">Login</a></div>
+
+        </div>
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>

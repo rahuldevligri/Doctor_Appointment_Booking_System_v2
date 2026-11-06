@@ -1,0 +1,100 @@
+import { Component } from '@angular/core';
+import axios from 'axios';
+
+@Component({
+  selector: 'app-payment',
+  templateUrl: './payment.component.html',
+  styleUrls: ['./payment.component.css']
+})
+export class PaymentComponent {
+
+  pay(amount: any){
+    let formdata = new FormData();
+    formdata.append("amount", amount);
+    // 
+    axios.post('http://localhost:5000/payment', formdata
+
+     
+    ).then((response: { data: any; })=>{
+
+      console.log(response.data);
+      let paymentId = response.data.paymentId;
+      this.paynow(amount, paymentId);
+
+    }).catch((error: any)=>{
+      console.log(error);
+    });
+    
+  }
+  
+  paynow(amount: any, paymentId: any){
+    var options={
+      key:'rzp_test_QvfhRP9slPcend',
+      amount: amount*100,
+      currency: 'INR',
+      name: 'Zumply Health',
+      image: 'https://avatars.githubusercontent.com/u/128212455?v=4',
+      // order_id:response.id,
+      // method:response.method,
+      handler:function(response: { razorpay_payment_id: any; razorpay_order_id: any; razorpay_signature: any; }){
+        console.log(response.razorpay_payment_id);
+        console.log(response.razorpay_order_id);
+        console.log(response.razorpay_signature);
+        console.log('payment successful !!');
+        // axios.post('http://zumplyhealth.ap-south-1.elasticbeanstalk.com/payment/success/'+paymentId).then((response: { data: any; })=>{
+          axios.post('http://localhost:5000/payment/success/'+paymentId).then((response: { data: any; })=>{
+          console.log(response.data);
+          // axios.post('http://zumplyhealth.ap-south-1.elasticbeanstalk.com/api/v1/appointment', {
+            axios.post('http://localhost:5000/api/v1/appointment', {
+          "doctorId": 1,
+          "patientId": 1,
+          "paymentId": paymentId,
+          "status": "booked",
+          "userId": window.localStorage.getItem('userId')
+        }).then((response: { data: any; })=>{
+          console.log(response.data);
+        }).catch((error: any)=>{
+          console.log(error);
+        });
+        }).catch((error: any)=>{
+          console.log(error);
+        });
+        
+
+        alert("congrates !! payment successful !!")
+        window.location.href="/payment-summary";
+      },
+      "prefill": {
+      "name": "",
+      "email": "",
+      "contact": ""
+      },
+      "notes": {
+        "address": "Book Appointment"
+      },
+      "theme": {
+        "color": "#F37254"
+      },
+    };
+    var rzp=new window['Razorpay'](options);
+
+    rzp.on('payment.failed', function (response: { error: { code: any; description: any; source: any; step: any; reason: any; metadata: { order_id: any; payment_id: any; }; }; }){
+      console.log(response.error.code);
+      console.log(response.error.description);
+      console.log(response.error.source);
+      console.log(response.error.step);
+      console.log(response.error.reason);
+      console.log(response.error.metadata.order_id);
+      console.log(response.error.metadata.payment_id);
+      // axios.post('http://zumplyhealth.ap-south-1.elasticbeanstalk.com/payment/fail/'+paymentId).then((response: { data: any; })=>{
+        axios.post('http://localhost:5000/payment/fail/'+paymentId).then((response: { data: any; })=>{
+          console.log(response.data);
+        }).catch((error: any)=>{
+          console.log(error);
+        });
+      alert("Oops payment failed !!");
+      window.location.href="/payment-summary";
+    });
+    rzp.open();
+  }
+}

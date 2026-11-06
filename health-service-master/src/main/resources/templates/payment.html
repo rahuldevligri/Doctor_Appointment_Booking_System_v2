@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <title>Payment Page</title>
+</head>
+<body>
+<h1>Payment Page</h1>
+<form>
+    <div class="form-group">
+        <label for="payment_field">Amount</label>
+        <input id="payment_field" type="text" class="form-control" placeholder="Enter amount" required>
+    </div>
+    <div class="form-group text-center">
+        <button type="button" class="btn btn-success btn-block" onclick="PaymentStart()">Pay</button>
+    </div>
+    <div class="form-group text-center">
+        <button type="button" class="btn btn-success btn-block" onclick="invoice()">Invoice</button>
+    </div>
+</form>
+
+<script>
+        const PaymentStart = () => {
+            console.log("payment started..");
+            let amount = $("#payment_field").val();
+            console.log(amount);
+            if (amount == "" || amount == null || amount == 0) {
+                // alert("Amount is required!!");
+				swal("Failed !!", "Amount is required!!", "error");
+                return;
+            }
+            if (isNaN(amount)) {
+                // alert("Invalid amount format. Please enter valid amount.");
+                swal("Failed !!", "Invalid amount format. Please enter valid amount!!", "error");
+                return;
+            }
+
+            // Make the AJAX request to create payment
+            $.ajax({
+                url: '/payment',
+                data: { amount: amount },
+                type: 'POST',
+                dataType: 'json',
+                success: function(response) {
+                    // Invoke when success
+                    console.log(response);
+					if(response.status ==  "created"){
+						//open payment form
+						let options={
+							key:'rzp_test_QvfhRP9slPcend',
+							amount: response.amount,
+							currency: 'INR',
+							name: 'Zumply Health',
+							image: 'https://avatars.githubusercontent.com/u/128212455?v=4',
+							order_id:response.id,
+							method:response.method,
+							handler:function(response){
+								console.log(response.razorpay_payment_id);
+								console.log(response.razorpay_order_id);
+								console.log(response.razorpay_method);
+								console.log(response.method);
+								console.log(response.status);
+								console.log(response.source);
+								console.log(response.amount);
+								console.log(response.currency);
+								console.log(response.success);
+								console.log(response.type);
+								console.log(response.reason);
+								console.log(response.razorpay_signature);
+								console.log('payment successful !!');
+								//alert("congrates !! payment successful !!");
+								swal("Good job!", "congrates !! payment successful !!", "success");
+							},
+							"prefill": {
+							"name": "",
+							"email": "",
+							"contact": ""
+							},
+							"notes": {
+								"address": "Book Appointment"
+							},
+							"theme": {
+								"color": "#F37254"
+							},
+						};
+						let rzp=new Razorpay(options);
+
+						rzp.on('payment.failed', function (response){
+							console.log(response.error.code);
+							console.log(response.error.description);
+							console.log(response.error.source);
+							console.log(response.error.step);
+							console.log(response.error.reason);
+							console.log(response.error.metadata.order_id);
+							console.log(response.error.metadata.payment_id);
+							console.log(response.error.metadata.razorpay_method);
+							console.log(response.error.metadata.status);
+							console.log(response.error.metadata.method);
+							console.log(response.error.amount);
+							console.log(response.error.currency);
+							console.log(response.error.invoice);
+							console.log(response.error.razorpay_payment_id);
+							console.log(response.error.method);
+							console.log(response.error.response);
+							console.log(response.error.reason);
+							console.log(response.error.responseText);
+							console.log(response.error.source);
+							console.log(response.error.status);
+							console.log(response.error.success);
+							// alert("Oops payment failed !!");
+							swal("Faild!", "Oops payment failed !!!", "error");
+						});
+						rzp.open();
+					}
+                },
+                error: function(error) {
+                    // Invoke when error
+                    console.log(error.responseText);
+                    alert("Something went wrong!!");
+                }
+            });
+        };
+
+		const invoice = () => {
+            console.log("invoice started..");
+		}
+    </script>
+</body>
+</html>

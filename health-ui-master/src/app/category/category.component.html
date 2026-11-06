@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="subcontainer">
+    <p *ngFor="let category of category" >
+      <img class="item" src="assets/image/{{category.specializationName}}.png"
+      onerror="this.src='assets/image/general.png';"  alt="..." /><br>
+      <!-- <a href="/doctorlist/{{category.id}}" (click)="getDoctorByCategory(category.id)" class="cateName"> -->
+
+        <a
+        href="javascript:void(0)"
+        (click)="selectCategory(category)"
+        class="cateName"
+      >
+        {{ category.specializationName }}</a>
+      <!-- <input type="hidden" name="categoryId" value="{{category.id}}" id="categoryId" [(ngModel)]="category.id"> -->
+    </p><br>
+  </div>
+</div>

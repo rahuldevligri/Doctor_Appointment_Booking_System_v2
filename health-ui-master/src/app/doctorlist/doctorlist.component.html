@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h2 class="text-center">Doctors List</h2>
+        </div>
+        <div class=" row mt-6">
+          <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+              <thead>
+                <tr>
+                  <th>Id</th>
+                  <th>Name</th>
+                  <th>Hospital</th>
+                  <th>Rating</th>
+                  <th>Registration No</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let doctor of doctors">
+                  <td>{{doctor.id}}</td>
+                  <td>{{doctor.fullName}}</td>
+                  <td>{{doctor.hospital['name']}}</td>
+                  <td>{{doctor.rating}}</td>
+                  <td>{{doctor.registrationNumber}}</td>
+                  <td>
+                    <button  class="btn btn-info" (click)="openModal(doctor)">Book Appointment</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

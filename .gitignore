@@ -1,0 +1,28 @@
+# Build outputs
+node_modules/
+dist/
+build/
+.angular/
+.gradle/
+bin/
+out/
+
+# IDE
+.idea/
+.vscode/
+*.iml
+*.iws
+*.ipr
+
+# Logs
+*.log
+
+# Sensitive config - never commit real credentials
+**/zumply.properties
+**/application-prod.properties
+**/application-dev.properties
+**/application.properties.local
+
+# OS
+.DS_Store
+Thumbs.db

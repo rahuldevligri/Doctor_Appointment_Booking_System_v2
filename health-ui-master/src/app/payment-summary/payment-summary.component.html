@@ -1,0 +1,88 @@
+<div class="container">
+    <div>
+        <h4 class="text-center">Appointment Booked Successsfuly</h4>
+
+        <!-- <button type="button" disabled class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+    Appointment Information
+    </button>
+        
+    </div> -->
+
+        <div class="Information">
+            <div class="docInfo">
+                <div class="userName">
+                    <p><span class="lable">User Name</span>
+                        <span class="colon" style="margin-left: 5.4rem;">:</span>
+                        <span class="value">{{paymentList[0]["user"]["username"]}}</span>
+                    </p>
+                </div>
+                <div class="docName">
+                    <p><span class="lable">Doctor Name</span>
+                        <span class="colon" style="margin-left: 4.4rem;">:</span>
+                        <span class="value">{{paymentList[0]["doctor"]["fullName"]}}</span>
+                    </p>
+                </div>
+                <div class="docSpeciality">
+                    <p><span class="lable">Dr. Specialization</span>
+                        <span class="colon" style="margin-left: 2.7rem;">:</span>
+                        <span class="value">{{paymentList[0]["doctor"]["doctorSpecialization"]["specializationName"]}}</span>
+                    </p>
+                </div>
+                <div class="docEmail">
+                    <p><span class="lable">Dr. Email</span>
+                        <span class="colon" style="margin-left: 6.4rem;">:</span>
+                        <span class="value">{{paymentList[0]["doctor"]["email"]}}</span>
+                    </p>
+                </div>
+                <div class="docMobile">
+                    <p><span class="lable">Dr. Mobile no.</span>
+                        <span class="colon" style="margin-left: 4.2rem;">:</span>
+                        <span class="value">{{paymentList[0]["doctor"]["mobile"]}}</span>
+                    </p>
+                </div>
+                <div class="Date">
+                    <p><span class="lable">Date</span>
+                        <span class="colon" style="margin-left: 7.9rem;">:</span>
+                        <span class="value">{{paymentList[0]["doctorSchedule"]["startTime"]| slice:0:10}}</span>
+                    </p>
+                </div>
+                <div class="startTime">
+                    <p><span class="lable">Start Time</span>
+                        <span class="colon" style="margin-left: 5.6rem;">:</span>
+                        <span class="value">{{paymentList[0]["doctorSchedule"]["startTime"]| slice:11:16}}</span>
+                    </p>
+                </div>
+                <div class="endTime">
+                    <p><span class="lable">End Time</span>
+                        <span class="colon" style="margin-left: 6.1rem;">:</span>
+                        <span class="value">{{paymentList[0]["doctorSchedule"]["endTime"]| slice:11:16}}</span>
+                    </p>
+                </div>
+
+                <div class="hosName">
+                    <p><span class="lable">Hospital Name</span>
+                        <span class="colon" style="margin-left: 3.5rem;">:</span>
+                        <span class="value">{{paymentList[0]["doctor"]["hospital"]["name"]}}</span>
+                    </p>
+                </div>
+                <div class="hosAddress">
+                    <p><span class="lable">Hospital Address</span>
+                        <span class="colon" style="margin-left: 2.6rem;">:</span>
+                        <span class="value">{{paymentList[0]["doctor"]["hospital"]["address"]}}</span>
+                    </p>
+                </div>
+
+                <div class="amount">
+                    <p><span class="lable">Amount</span>
+                    <span class="colon"  style="margin-left: 6.7rem;">:</span>
+                <span class="value"> {{paymentList[0]["payment"]["amount"]}}</span></p>
+                </div>
+                <div class="appointment">
+                    <p><span class="lable">Payment status</span>
+                        <span class="colon" style="margin-left: 3.2rem;">:</span>
+                        <span class="value">{{paymentList[0]["payment"]["status"]}}</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>

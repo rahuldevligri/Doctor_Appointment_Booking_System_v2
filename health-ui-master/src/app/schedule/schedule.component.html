@@ -1,0 +1,18 @@
+
+      <div style="padding: 50px">
+        <h2 class="text-center">Schedule</h2>
+        <table>
+          <tr class="text-center" style="background-color: blue">
+            <th>Doctor Schedule Id</th>
+            <th>Slot</th>
+            <th>Action</th>
+          </tr>
+          <tr *ngFor="let schedule of scheduleList">
+            <td>{{schedule.doctorScheduleId}}</td>
+            <td>{{ schedule.startTime }}  -  {{ schedule.endTime }}</td>
+            <!-- <td>{{ formatTime(scheduleList.startTime) }} - {{ formatTime(scheduleList.endTime) }}</td> -->
+            <td><button (click)="book(schedule)">Book now</button></td>
+          </tr>
+        </table>
+      </div>
+     
